@@ -3,8 +3,6 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import Menu from '../components/menu';
 import Posts from '../components/posts';
-import { useDispatch } from 'react-redux';
-import { getPostsRequest } from '../actions/postsAction';
 
 const Container = styled.div`
     max-width: 1500px;
@@ -12,12 +10,6 @@ const Container = styled.div`
 `;
 
 export default function Home() {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getPostsRequest());
-    }, []);
-
     return (
         <Container>
             <Head>
@@ -25,14 +17,8 @@ export default function Home() {
                 <meta name="description" content="All posts" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Menu searchVisibility={true} addVisibility={true} />
+            <Menu />
             <Posts />
         </Container>
     );
 }
-
-// export const getStaticProps: GetStaticProps = async () => {
-//     const response = await axios.get('https://simple-blog-api.crew.red/posts');
-//     console.log(response);
-//     return 'sdf';
-// };

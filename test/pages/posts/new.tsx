@@ -10,7 +10,7 @@ const CreatePostContainer = styled.div`
 const New: React.FC = () => {
     return (
         <>
-            <Menu searchVisibility={false} addVisibility={false} />
+            <Menu />
             <CreatePostContainer>
                 <h1>Create new post</h1>
                 <CreatePost />

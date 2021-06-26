@@ -17,7 +17,7 @@ const postsAction = {
 
 export const getPostsRequest = () => async (dispatch: Dispatch) => {
     const response = await axios.get('https://simple-blog-api.crew.red/posts');
-    dispatch(postsAction.setPosts(response.data as Array<Post>));
+    dispatch(postsAction.setPosts(response.data.reverse() as Array<Post>));
 };
 
 export const publishNewPost = (title: string, body: string) => async (dispatch: Dispatch) => {

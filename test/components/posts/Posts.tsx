@@ -1,8 +1,9 @@
-import React from 'react';
-import Post from './post';
+import React, { useEffect } from 'react';
+import PostComponent from './post';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../selectors/selectors';
+import { getPostsRequest } from '../../actions/postsAction';
 
 const Container = styled.main`
     display: flex;
@@ -15,8 +16,13 @@ const Container = styled.main`
 
 const Posts: React.FC = () => {
     const posts = useSelector(getPosts);
+    const dispatch = useDispatch();
 
-    console.log(posts);
+    useEffect(() => {
+        if (posts.length === 0) {
+            dispatch(getPostsRequest());
+        }
+    }, []);
 
     return (
         <>
@@ -24,7 +30,7 @@ const Posts: React.FC = () => {
             {posts.length !== 0 && (
                 <Container>
                     {posts.map((post) => (
-                        <Post key={post.id} id={post.id} title={post.title} description={post.body} />
+                        <PostComponent key={post.id} id={post.id} title={post.title} body={post.body} />
                     ))}
                 </Container>
             )}

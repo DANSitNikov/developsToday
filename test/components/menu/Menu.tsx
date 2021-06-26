@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import Search from '../search';
 import AddPost from './addPost';
 
 const Container = styled.header`
@@ -17,23 +16,16 @@ const SuperBlog = styled.a`
     font-size: 20px;
     color: #727272;
     cursor: pointer;
+    text-decoration: underline;
 `;
 
-interface Props {
-    searchVisibility: boolean;
-    addVisibility: boolean;
-}
-
-const Menu: React.FC<Props> = (props) => {
-    const { searchVisibility, addVisibility } = props;
-
+const Menu: React.FC = () => {
     return (
         <Container>
             <Link href="/">
                 <SuperBlog>SUPER blog</SuperBlog>
             </Link>
-            {/*<Search searchVisibility={searchVisibility} />*/}
-            <AddPost addVisibility={addVisibility} />
+            <AddPost />
         </Container>
     );
 };

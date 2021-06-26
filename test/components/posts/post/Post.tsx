@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import descriptionMaxLength from '../../../utils/descriptionMaxLength';
 import Link from 'next/link';
+import { Post } from '../../../reducers/postsReducer';
 
 const Root = styled(Card)`
     position: relative;
@@ -21,14 +22,8 @@ const Media = styled(CardMedia)`
     height: 140px;
 `;
 
-interface Props {
-    title: string;
-    description: string;
-    id: number;
-}
-
-const Post: React.FC<Props> = (props) => {
-    const { title, description, id } = props;
+const PostComponent: React.FC<Post> = (props) => {
+    const { title, body, id } = props;
 
     return (
         <Link href={`posts/${id}`}>
@@ -39,7 +34,7 @@ const Post: React.FC<Props> = (props) => {
                         {title}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {descriptionMaxLength(description)}
+                        {descriptionMaxLength(body)}
                     </Typography>
                 </CardContent>
             </Root>
@@ -47,4 +42,4 @@ const Post: React.FC<Props> = (props) => {
     );
 };
 
-export default Post;
+export default PostComponent;
