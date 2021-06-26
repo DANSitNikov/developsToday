@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { publishNewPost } from '../../actions/postsAction';
 
 const Form = styled.form`
     max-width: 800px;
@@ -46,10 +48,12 @@ const Label = styled.label`
 const CreatePost: React.FC = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const dispatch = useDispatch();
 
-    const publishNewPost = (e: React.FormEvent<HTMLButtonElement>) => {
+    const submitPost = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log(title, content);
+
+        dispatch(publishNewPost(title, content));
     };
 
     return (
@@ -60,7 +64,7 @@ const CreatePost: React.FC = () => {
             <br />
             <Label htmlFor="content">Content</Label>
             <Content onChange={(e) => setContent(e.target.value)} id="content" />
-            <PublishPost onClick={publishNewPost} type="submit">
+            <PublishPost onClick={submitPost} type="submit">
                 Publish new post
             </PublishPost>
         </Form>
