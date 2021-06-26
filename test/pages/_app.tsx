@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/globals.css';
+import '../styles/fonts.css';
 import type { AppProps } from 'next/app';
 import { useStore } from '../store/store';
 import { Provider } from 'react-redux';
