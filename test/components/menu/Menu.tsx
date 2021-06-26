@@ -32,7 +32,7 @@ const Menu: React.FC<Props> = (props) => {
             <Link href="/">
                 <SuperBlog>SUPER blog</SuperBlog>
             </Link>
-            <Search searchVisibility={searchVisibility} />
+            {/*<Search searchVisibility={searchVisibility} />*/}
             <AddPost addVisibility={addVisibility} />
         </Container>
     );

@@ -1,21 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-    Button,
-    Card,
-    CardActionArea,
-    CardActions,
-    CardContent,
-    CardMedia,
-    makeStyles,
-    Typography,
-} from '@material-ui/core';
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
 import descriptionMaxLength from '../../../utils/descriptionMaxLength';
 import Link from 'next/link';
 
 const Root = styled(Card)`
-    max-width: 330px;
+    position: relative;
+    width: 310px;
+    height: 350px;
     box-shadow: none;
+    cursor: pointer;
+    transition: 0.5s !important;
+
+    &:hover {
+        background-color: whitesmoke;
+    }
 `;
 
 const Media = styled(CardMedia)`
@@ -25,7 +24,7 @@ const Media = styled(CardMedia)`
 interface Props {
     title: string;
     description: string;
-    id: any;
+    id: number;
 }
 
 const Post: React.FC<Props> = (props) => {
@@ -34,22 +33,15 @@ const Post: React.FC<Props> = (props) => {
     return (
         <Link href={`posts/${id}`}>
             <Root>
-                <CardActionArea>
-                    <Media image="/static/images/cards/contemplative-reptile.jpg" title="Contemplative Reptile" />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {title}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {descriptionMaxLength(description)}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions>
-                    <Button size="small" color="primary">
-                        Learn More
-                    </Button>
-                </CardActions>
+                <Media image="http://placehold.it/310x140" title="Contemplative Reptile" />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {title}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        {descriptionMaxLength(description)}
+                    </Typography>
+                </CardContent>
             </Root>
         </Link>
     );

@@ -3,9 +3,7 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import Menu from '../components/menu';
 import Posts from '../components/posts';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPosts } from '../selectors/selectors';
+import { useDispatch } from 'react-redux';
 import { getPostsRequest } from '../actions/postsAction';
 
 const Container = styled.div`
@@ -15,13 +13,10 @@ const Container = styled.div`
 
 export default function Home() {
     const dispatch = useDispatch();
-    const posts = useSelector(getPosts);
 
-    console.log(posts);
-
-    // useEffect(() => {
-    //     dispatch(getPostsRequest());
-    // }, []);
+    useEffect(() => {
+        dispatch(getPostsRequest());
+    }, []);
 
     return (
         <Container>
