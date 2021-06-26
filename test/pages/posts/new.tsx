@@ -4,7 +4,7 @@ import Menu from '../../components/menu';
 const New: React.FC = () => {
     return (
         <>
-            <Menu />
+            <Menu searchVisibility={false} addVisibility={false} />
             <div>new post create here</div>;
         </>
     );

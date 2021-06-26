@@ -7,7 +7,7 @@ const Post: React.FC = () => {
 
     return (
         <>
-            <Menu />
+            <Menu searchVisibility={false} addVisibility={false} />
             <div>{router.query.id}</div>
         </>
     );

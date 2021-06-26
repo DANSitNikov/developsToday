@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Menu from '../components/menu';
 import Posts from '../components/posts';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPosts } from '../selectors/selectors';
+import { getPostsRequest } from '../actions/postsAction';
 
 const Container = styled.div`
     max-width: 1500px;
@@ -10,6 +14,15 @@ const Container = styled.div`
 `;
 
 export default function Home() {
+    const dispatch = useDispatch();
+    const posts = useSelector(getPosts);
+
+    console.log(posts);
+
+    // useEffect(() => {
+    //     dispatch(getPostsRequest());
+    // }, []);
+
     return (
         <Container>
             <Head>
@@ -17,8 +30,14 @@ export default function Home() {
                 <meta name="description" content="All posts" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Menu />
+            <Menu searchVisibility={true} addVisibility={true} />
             <Posts />
         </Container>
     );
 }
+
+// export const getStaticProps: GetStaticProps = async () => {
+//     const response = await axios.get('https://simple-blog-api.crew.red/posts');
+//     console.log(response);
+//     return 'sdf';
+// };

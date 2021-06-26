@@ -8,6 +8,7 @@ const Container = styled.div`
     border: 2px solid whitesmoke;
     width: 300px;
     height: 30px;
+    visibility: ${(props: { status: boolean }) => (props.status ? 'visible' : 'hidden')};
 `;
 
 const Input = styled.input`
@@ -22,9 +23,15 @@ const Magnifier = styled(SearchIcon)`
     color: #bbbbbb;
 `;
 
-const Search: React.FC = () => {
+interface Props {
+    searchVisibility: boolean;
+}
+
+const Search: React.FC<Props> = (props) => {
+    const { searchVisibility } = props;
+
     return (
-        <Container>
+        <Container status={searchVisibility}>
             <Input placeholder="search post" />
             <Magnifier />
         </Container>

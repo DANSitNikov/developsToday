@@ -19,14 +19,21 @@ const SuperBlog = styled.a`
     cursor: pointer;
 `;
 
-const Menu: React.FC = () => {
+interface Props {
+    searchVisibility: boolean;
+    addVisibility: boolean;
+}
+
+const Menu: React.FC<Props> = (props) => {
+    const { searchVisibility, addVisibility } = props;
+
     return (
         <Container>
             <Link href="/">
                 <SuperBlog>SUPER blog</SuperBlog>
             </Link>
-            <Search />
-            <AddPost />
+            <Search searchVisibility={searchVisibility} />
+            <AddPost addVisibility={addVisibility} />
         </Container>
     );
 };
