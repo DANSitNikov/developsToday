@@ -1,14 +1,22 @@
 import React from 'react';
-import { IconButton } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import Link from 'next/link';
+import styled from 'styled-components';
+
+const CreateNewPost = styled(Button)`
+    display: flex;
+    color: #727272 !important;
+    font-size: 13px !important;
+`;
 
 const AddPost: React.FC = () => {
     return (
-        <Link href="posts/new">
-            <IconButton aria-label="add new post">
+        <Link href="/posts/new">
+            <CreateNewPost>
+                create new post
                 <AddIcon />
-            </IconButton>
+            </CreateNewPost>
         </Link>
     );
 };

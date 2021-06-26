@@ -26,7 +26,7 @@ const PostComponent: React.FC<Post> = (props) => {
     const { title, body, id } = props;
 
     return (
-        <Link href={`posts/${id}`}>
+        <Link href={`/posts/${id}`}>
             <Root>
                 <Media image="http://placehold.it/310x140" title="Contemplative Reptile" />
                 <CardContent>

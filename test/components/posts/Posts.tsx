@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../selectors/selectors';
 import { getPostsRequest } from '../../actions/postsAction';
+import Loader from '../loader';
 
 const Container = styled.main`
     display: flex;
@@ -26,7 +27,7 @@ const Posts: React.FC = () => {
 
     return (
         <>
-            {posts.length === 0 && <div>loading...</div>}
+            {posts.length === 0 && <Loader />}
             {posts.length !== 0 && (
                 <Container>
                     {posts.map((post) => (

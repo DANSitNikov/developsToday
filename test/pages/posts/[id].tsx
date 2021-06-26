@@ -4,6 +4,7 @@ import Menu from '../../components/menu';
 import axios from 'axios';
 import { Post } from '../../reducers/postsReducer';
 import styled from 'styled-components';
+import Loader from '../../components/loader';
 
 const PostContainer = styled.div``;
 
@@ -14,12 +15,14 @@ const PostHeader = styled.h1`
 const PostBodyWrapper = styled.div`
     max-width: 800px;
     margin: 0 auto;
+    padding: 10px;
 `;
 
 const PostBody = styled.p`
     text-align: justify;
     color: #727272;
     font-size: 20px;
+    margin: 0;
 `;
 
 const PostComponent: React.FC = () => {
@@ -46,7 +49,7 @@ const PostComponent: React.FC = () => {
                     </PostBodyWrapper>
                 </PostContainer>
             )}
-            {post === undefined && <div>loading...</div>}
+            {post === undefined && <Loader />}
         </>
     );
 };
