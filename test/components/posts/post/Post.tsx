@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import descriptionMaxLength from '../../../utils/descriptionMaxLength';
 import Link from 'next/link';
 

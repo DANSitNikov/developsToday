@@ -16,6 +16,8 @@ const Container = styled.main`
 const Posts: React.FC = () => {
     const posts = useSelector(getPosts);
 
+    console.log(posts);
+
     return (
         <>
             {posts.length === 0 && <div>loading...</div>}
