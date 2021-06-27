@@ -17,4 +17,4 @@
 
 ## Added features
 * Validation (you can't send empty comment or post) - I did it by myself (without Formik or something else), it's not as briliant as i want it to be, but it works
-* Notification - post created successfully or not and error with sending message
+* Notification - post created successfully or not and error with sending comment
