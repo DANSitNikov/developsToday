@@ -44,7 +44,7 @@ export const publishNewComment = (body: string, postId: number) => async (dispat
 
     try {
         dispatch(addNewCommentStatus(AddStatus.PENDING));
-        const comment = await axios.post('htps://simple-blog-api.crew.red/comments', {
+        const comment = await axios.post('https://simple-blog-api.crew.red/comments', {
             body,
             postId,
         });

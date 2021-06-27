@@ -8,6 +8,7 @@ import Loader from '../../components/loader';
 import Error from '../../components/error';
 import Comments from '../../components/comment';
 import Notification from '../../components/notification';
+import Head from 'next/head';
 
 const PostContainer = styled.div`
     max-width: 900px;
@@ -58,6 +59,11 @@ const PostComponent: React.FC = () => {
 
     return (
         <>
+            <Head>
+                <title>{post?.title}</title>
+                <meta name="description" content="post description" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Menu />
             {post !== undefined && !error && (
                 <PostContainer>

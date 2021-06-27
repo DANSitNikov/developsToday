@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Menu from '../components/menu';
@@ -10,7 +10,7 @@ const Container = styled.div`
     margin: 0 auto;
 `;
 
-export default function Home() {
+export default function Home(): JSX.Element {
     return (
         <Container>
             <Head>
