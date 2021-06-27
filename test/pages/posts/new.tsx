@@ -3,6 +3,7 @@ import Menu from '../../components/menu';
 import styled from 'styled-components';
 import CreatePost from '../../components/createPost';
 import Head from 'next/head';
+import { Container } from '../index';
 
 const CreatePostContainer = styled.div`
     text-align: center;
@@ -10,7 +11,7 @@ const CreatePostContainer = styled.div`
 
 const New: React.FC = () => {
     return (
-        <>
+        <Container>
             <Head>
                 <title>Create new post</title>
                 <meta name="description" content="Create new post" />
@@ -21,7 +22,7 @@ const New: React.FC = () => {
                 <h1>Create new post</h1>
                 <CreatePost />
             </CreatePostContainer>
-        </>
+        </Container>
     );
 };
 

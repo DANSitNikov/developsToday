@@ -6,14 +6,14 @@ import AddPost from './addPost';
 const Container = styled.header`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between !important;
     padding: 10px 15px;
     border-bottom: 2px solid whitesmoke;
     z-index: 100;
 `;
 
 const SuperBlog = styled.a`
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Dancing Script', cursive !important;
     font-size: 20px;
     color: #727272;
     cursor: pointer;

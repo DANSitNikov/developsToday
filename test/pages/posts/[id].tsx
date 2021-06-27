@@ -9,6 +9,7 @@ import Error from '../../components/error';
 import Comments from '../../components/comment';
 import Notification from '../../components/notification';
 import Head from 'next/head';
+import { Container } from '../index';
 
 const PostContainer = styled.div`
     max-width: 900px;
@@ -58,7 +59,7 @@ const PostComponent: React.FC = () => {
     }, [router]);
 
     return (
-        <>
+        <Container>
             <Head>
                 <title>{post?.title}</title>
                 <meta name="description" content="post description" />
@@ -79,7 +80,7 @@ const PostComponent: React.FC = () => {
             )}
             {post === undefined && !error && <Loader />}
             {error && <Error />}
-        </>
+        </Container>
     );
 };
 
