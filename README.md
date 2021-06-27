@@ -11,6 +11,6 @@
 
 ## Problem
 * I have a problem with 'Warning: Prop `className` did not match.'.
-* This warning appears when i reload any page in my application.
+* This warning appears when I reload any page in my application.
 * Because of this there is some problems with styles.
 * I've tried different solutions but nothing helped me (may be it's because I'm using material-ui, but I'm not sure)
