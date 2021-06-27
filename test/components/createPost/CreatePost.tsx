@@ -24,7 +24,7 @@ const Title = styled.input`
     color: #727272;
 `;
 
-const Content = styled.textarea`
+export const Content = styled.textarea`
     width: 100%;
     color: #727272;
     padding: 10px;

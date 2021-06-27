@@ -6,10 +6,17 @@ import { Post } from '../../reducers/postsReducer';
 import styled from 'styled-components';
 import Loader from '../../components/loader';
 import Error from '../../components/error';
+import Comment from '../../components/comment';
 
 const PostContainer = styled.div`
     max-width: 900px;
     margin: 0 auto;
+`;
+
+const PostContent = styled.div`
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom: 2px solid whitesmoke;
 `;
 
 const PostHeader = styled.h1`
@@ -51,10 +58,13 @@ const PostComponent: React.FC = () => {
             <Menu />
             {post !== undefined && !error && (
                 <PostContainer>
-                    <PostHeader>{post?.title}</PostHeader>
-                    <PostBodyWrapper>
-                        <PostBody>{post?.body}</PostBody>
-                    </PostBodyWrapper>
+                    <PostContent>
+                        <PostHeader>{post?.title}</PostHeader>
+                        <PostBodyWrapper>
+                            <PostBody>{post?.body}</PostBody>
+                        </PostBodyWrapper>
+                    </PostContent>
+                    <Comment />
                 </PostContainer>
             )}
             {post === undefined && !error && <Loader />}
