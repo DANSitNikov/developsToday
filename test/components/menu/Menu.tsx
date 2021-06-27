@@ -9,6 +9,7 @@ const Container = styled.header`
     justify-content: space-between;
     padding: 10px 15px;
     border-bottom: 2px solid whitesmoke;
+    z-index: 100;
 `;
 
 const SuperBlog = styled.a`

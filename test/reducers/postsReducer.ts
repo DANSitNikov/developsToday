@@ -1,6 +1,17 @@
 import { ActionsType } from './rootReducer';
 import postsAction from '../actions/postsAction';
 
+export enum Status {
+    OK = 'OK',
+    ERROR = 'ERROR',
+}
+
+export enum AddPostStatus {
+    PENDING = 'PENDING',
+    OK = 'OK',
+    ERROR = 'ERROR',
+}
+
 export interface Post {
     title: string;
     body: string;
@@ -9,6 +20,8 @@ export interface Post {
 
 const initialState = {
     posts: [] as Array<Post>,
+    status: null as null | Status,
+    addPostStatus: null as null | AddPostStatus,
 };
 
 type InitialState = typeof initialState;
@@ -24,7 +37,17 @@ const postsReducer = (state = initialState, action: ActionType): InitialState =>
         case 'ADD_POST':
             return {
                 ...state,
-                posts: [...state.posts, action.post],
+                posts: [action.post, ...state.posts],
+            };
+        case 'SET_STATUS':
+            return {
+                ...state,
+                status: action.status,
+            };
+        case 'ADD_NEW_POST_STATUS':
+            return {
+                ...state,
+                addPostStatus: action.status,
             };
         default:
             return state;

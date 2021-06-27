@@ -1,4 +1,4 @@
-import { Post } from '../reducers/postsReducer';
+import { AddPostStatus, Post, Status } from '../reducers/postsReducer';
 import { Dispatch } from 'redux';
 import axios from 'axios';
 
@@ -13,20 +13,49 @@ const postsAction = {
             type: 'ADD_POST',
             post,
         } as const),
+    setStatus: (status: Status) =>
+        ({
+            type: 'SET_STATUS',
+            status,
+        } as const),
+    addNewPostStatus: (status: AddPostStatus | null) =>
+        ({
+            type: 'ADD_NEW_POST_STATUS',
+            status,
+        } as const),
 };
 
 export const getPostsRequest = () => async (dispatch: Dispatch) => {
-    const response = await axios.get('https://simple-blog-api.crew.red/posts');
-    dispatch(postsAction.setPosts(response.data.reverse() as Array<Post>));
+    const { setPosts, setStatus } = postsAction;
+    try {
+        const response = await axios.get('https://simple-blog-api.crew.red/posts');
+        dispatch(setPosts(response.data.reverse() as Array<Post>));
+        dispatch(setStatus(Status.OK));
+    } catch (err) {
+        console.error(err);
+        dispatch(setStatus(Status.ERROR));
+    }
 };
 
 export const publishNewPost = (title: string, body: string) => async (dispatch: Dispatch) => {
-    const post = await axios.post('https://simple-blog-api.crew.red/posts', {
-        title,
-        body,
-    });
+    const { addPost, addNewPostStatus } = postsAction;
 
-    console.log(post, 'new some time be');
+    try {
+        dispatch(addNewPostStatus(AddPostStatus.PENDING));
+        const post = await axios.post('https://simple-blog-api.crew.red/posts', {
+            title,
+            body,
+        });
+        dispatch(addPost(post.data));
+        dispatch(addNewPostStatus(AddPostStatus.OK));
+    } catch (err) {
+        console.error(err);
+        dispatch(addNewPostStatus(AddPostStatus.ERROR));
+    } finally {
+        setTimeout(() => {
+            dispatch(addNewPostStatus(null));
+        }, 3000);
+    }
 };
 
 export default postsAction;

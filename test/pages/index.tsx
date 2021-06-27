@@ -3,9 +3,10 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import Menu from '../components/menu';
 import Posts from '../components/posts';
+import Notification from '../components/notification';
 
 const Container = styled.div`
-    max-width: 1500px;
+    max-width: 1200px;
     margin: 0 auto;
 `;
 
@@ -19,6 +20,7 @@ export default function Home() {
             </Head>
             <Menu />
             <Posts />
+            <Notification />
         </Container>
     );
 }

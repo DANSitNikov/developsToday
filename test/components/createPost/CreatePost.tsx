@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { publishNewPost } from '../../actions/postsAction';
+import { useRouter } from 'next/router';
 
 const Form = styled.form`
     max-width: 800px;
@@ -48,12 +49,13 @@ const Label = styled.label`
 const CreatePost: React.FC = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const router = useRouter();
     const dispatch = useDispatch();
 
     const submitPost = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-
         dispatch(publishNewPost(title, content));
+        router.push('/');
     };
 
     return (

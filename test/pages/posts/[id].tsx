@@ -5,16 +5,18 @@ import axios from 'axios';
 import { Post } from '../../reducers/postsReducer';
 import styled from 'styled-components';
 import Loader from '../../components/loader';
+import Error from '../../components/error';
 
-const PostContainer = styled.div``;
+const PostContainer = styled.div`
+    max-width: 900px;
+    margin: 0 auto;
+`;
 
 const PostHeader = styled.h1`
     text-align: center;
 `;
 
 const PostBodyWrapper = styled.div`
-    max-width: 800px;
-    margin: 0 auto;
     padding: 10px;
 `;
 
@@ -27,21 +29,27 @@ const PostBody = styled.p`
 
 const PostComponent: React.FC = () => {
     const [post, setPost] = useState<Post>();
+    const [error, setError] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
         const id = router.query.id;
 
         (async function () {
-            const response = await axios.get(`https://simple-blog-api.crew.red/posts/${id}`);
-            setPost(response.data);
+            try {
+                const response = await axios.get(`https://simple-blog-api.crew.red/posts/${id}`);
+                setPost(response.data);
+            } catch (err) {
+                console.log(err);
+                setError(true);
+            }
         })();
     }, []);
 
     return (
         <>
             <Menu />
-            {post !== undefined && (
+            {post !== undefined && !error && (
                 <PostContainer>
                     <PostHeader>{post?.title}</PostHeader>
                     <PostBodyWrapper>
@@ -49,7 +57,8 @@ const PostComponent: React.FC = () => {
                     </PostBodyWrapper>
                 </PostContainer>
             )}
-            {post === undefined && <Loader />}
+            {post === undefined && !error && <Loader />}
+            {error && <Error />}
         </>
     );
 };
