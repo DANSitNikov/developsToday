@@ -13,6 +13,19 @@ const Form = styled.form`
     padding: 10px;
 `;
 
+const FormItem = styled.div`
+    text-align: left;
+    position: relative;
+`;
+
+const Warning = styled.span`
+    position: absolute;
+    top: 0;
+    left: 150px;
+    color: red;
+    font-size: 22px;
+`;
+
 const Title = styled.input`
     width: 100%;
     height: 50px;
@@ -49,23 +62,57 @@ const Label = styled.label`
 const CreatePost: React.FC = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [isTitleOk, setIsTitleOk] = useState(true);
+    const [isContentOk, setIsContentOk] = useState(true);
     const router = useRouter();
     const dispatch = useDispatch();
 
     const submitPost = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        dispatch(publishNewPost(title, content));
-        router.push('/');
+
+        if (isTitleOk && isContentOk) {
+            dispatch(publishNewPost(title, content));
+            router.push('/');
+        }
     };
 
     return (
         <Form>
-            <Label htmlFor="title">Title</Label>
-            <Title onChange={(e) => setTitle(e.target.value)} id="title" type="text" />
+            <FormItem>
+                <Label htmlFor="title">Title</Label>
+                {!isTitleOk && <Warning>Title is required!</Warning>}
+                <Title
+                    onChange={(e) => {
+                        const targetValue = e.target.value;
+                        setTitle(targetValue);
+                        if (targetValue.length === 0) {
+                            setIsTitleOk(false);
+                        } else {
+                            setIsTitleOk(true);
+                        }
+                    }}
+                    id="title"
+                    type="text"
+                />
+            </FormItem>
             <br />
             <br />
-            <Label htmlFor="content">Content</Label>
-            <Content onChange={(e) => setContent(e.target.value)} id="content" />
+            <FormItem>
+                <Label htmlFor="content">Content</Label>
+                {!isContentOk && <Warning>To short!</Warning>}
+                <Content
+                    onChange={(e) => {
+                        const targetValue = e.target.value;
+                        setContent(targetValue);
+                        if (targetValue.length <= 10) {
+                            setIsContentOk(false);
+                        } else {
+                            setIsContentOk(true);
+                        }
+                    }}
+                    id="content"
+                />
+            </FormItem>
             <PublishPost onClick={submitPost} type="submit">
                 Publish new post
             </PublishPost>

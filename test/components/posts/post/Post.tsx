@@ -4,6 +4,7 @@ import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import descriptionMaxLength from '../../../utils/descriptionMaxLength';
 import Link from 'next/link';
 import { Post } from '../../../reducers/postsReducer';
+import template from '../../../assets/images/template.png';
 
 const Root = styled(Card)`
     position: relative;
@@ -52,9 +53,9 @@ const PostComponent: React.FC<Post & Index> = (props) => {
     return (
         <Link href={`/posts/${id}`}>
             <Root index={index}>
-                <Media index={index} image="http://placehold.it/300" title="Contemplative Reptile" />
+                <Media index={index} image={template.src} title="Contemplative Reptile" />
                 <ContentWrapper index={index}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography style={{ lineHeight: 1.3 }} gutterBottom variant="h6" component="h3">
                         {title}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">

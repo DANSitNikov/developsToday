@@ -29,6 +29,35 @@ const Form = styled.form`
     grid-template-columns: 3fr 1fr;
     column-gap: 20px;
     align-items: flex-end;
+
+    @media (max-width: 500px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 20px;
+
+        button,
+        div {
+            width: 100%;
+        }
+
+        textarea {
+            height: 70px;
+        }
+    }
+`;
+
+const FormItem = styled.div`
+    text-align: left;
+    position: relative;
+`;
+
+const Warning = styled.span`
+    position: absolute;
+    top: 0;
+    left: 200px;
+    color: red;
+    font-size: 20px;
 `;
 
 const Label = styled.label`
@@ -45,6 +74,7 @@ const Comments: React.FC = () => {
     const router = useRouter();
     const postId = Number(router?.query?.id);
     const comments = useSelector(getComments).filter((comment) => comment.postId === postId);
+    const [isCommentOk, setIsCommentOk] = useState(true);
     const [commentBody, setCommentBody] = useState('');
     const dispatch = useDispatch();
 
@@ -56,22 +86,34 @@ const Comments: React.FC = () => {
 
     const submitComment = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        dispatch(publishNewComment(commentBody, postId));
-        setCommentBody('');
+
+        if (isCommentOk) {
+            dispatch(publishNewComment(commentBody, postId));
+            setCommentBody('');
+        }
     };
 
     return (
         <Container>
             <Form action="">
-                <div>
+                <FormItem>
                     <Label htmlFor="leaveComment">Leave your comment</Label>
+                    {!isCommentOk && <Warning>Too short!</Warning>}
                     <NewComment
-                        onChange={(e) => setCommentBody(e.target.value)}
+                        onChange={(e) => {
+                            const targetValue = e.target.value;
+                            setCommentBody(targetValue);
+                            if (targetValue.length === 0) {
+                                setIsCommentOk(false);
+                            } else {
+                                setIsCommentOk(true);
+                            }
+                        }}
                         id="leaveComment"
                         value={commentBody}
                         style={{ minHeight: '150px !important' }}
                     />
-                </div>
+                </FormItem>
                 <Button onClick={submitComment} type="submit">
                     Send
                 </Button>
