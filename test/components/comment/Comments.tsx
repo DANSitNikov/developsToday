@@ -75,6 +75,7 @@ const Comments: React.FC = () => {
     const postId = Number(router?.query?.id);
     const comments = useSelector(getComments).filter((comment) => comment.postId === postId);
     const [isCommentOk, setIsCommentOk] = useState(true);
+    const [touched, setTouched] = useState(false);
     const [commentBody, setCommentBody] = useState('');
     const dispatch = useDispatch();
 
@@ -87,7 +88,7 @@ const Comments: React.FC = () => {
     const submitComment = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        if (isCommentOk) {
+        if (isCommentOk && touched) {
             dispatch(publishNewComment(commentBody, postId));
             setCommentBody('');
         }
@@ -103,6 +104,7 @@ const Comments: React.FC = () => {
                         onChange={(e) => {
                             const targetValue = e.target.value;
                             setCommentBody(targetValue);
+                            setTouched(true);
                             if (targetValue.length === 0) {
                                 setIsCommentOk(false);
                             } else {

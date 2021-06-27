@@ -63,14 +63,16 @@ const CreatePost: React.FC = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [isTitleOk, setIsTitleOk] = useState(true);
+    const [titleTouched, setTitleTouched] = useState(false);
     const [isContentOk, setIsContentOk] = useState(true);
+    const [contentTouched, setContentTouched] = useState(false);
     const router = useRouter();
     const dispatch = useDispatch();
 
     const submitPost = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        if (isTitleOk && isContentOk) {
+        if (isTitleOk && isContentOk && titleTouched && contentTouched) {
             dispatch(publishNewPost(title, content));
             router.push('/');
         }
@@ -85,6 +87,7 @@ const CreatePost: React.FC = () => {
                     onChange={(e) => {
                         const targetValue = e.target.value;
                         setTitle(targetValue);
+                        setTitleTouched(true);
                         if (targetValue.length === 0) {
                             setIsTitleOk(false);
                         } else {
@@ -104,6 +107,7 @@ const CreatePost: React.FC = () => {
                     onChange={(e) => {
                         const targetValue = e.target.value;
                         setContent(targetValue);
+                        setContentTouched(true);
                         if (targetValue.length <= 10) {
                             setIsContentOk(false);
                         } else {
