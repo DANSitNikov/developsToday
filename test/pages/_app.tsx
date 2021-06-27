@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app';
 import { useStore } from '../store/store';
 import { Provider } from 'react-redux';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     const store = useStore(pageProps.initialReduxState);
 
     return (

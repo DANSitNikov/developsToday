@@ -39,8 +39,6 @@ const Notification: React.FC<Props> = (props) => {
     const addPostStatus = useSelector(getAddPostStatus);
     const addCommentStatus = useSelector(getAddCommentStatus);
 
-    console.log(type, addCommentStatus);
-
     return (
         <>
             {((type === 'post' && addPostStatus === AddStatus.ERROR) || addPostStatus === AddStatus.OK) && (
