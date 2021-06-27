@@ -29,6 +29,11 @@ const commentsReducer = (state = initialState, action: ActionType): InitialState
                 ...state,
                 comments: [action.comment, ...state.comments],
             };
+        case 'ADD_NEW_COMMENT_STATUS':
+            return {
+                ...state,
+                addCommentStatus: action.status,
+            };
         default:
             return state;
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getAddPostStatus } from '../../selectors/selectors';
+import { getAddCommentStatus, getAddPostStatus } from '../../selectors/selectors';
 import { AddStatus } from '../../reducers/postsReducer';
 import styled from 'styled-components';
 
@@ -30,19 +30,30 @@ const SuccessMessage = styled.h3`
     color: #0eac0e;
 `;
 
-const Notification: React.FC = () => {
-    const addPostStatus = useSelector(getAddPostStatus);
+interface Props {
+    type: string;
+}
 
-    console.log(addPostStatus);
+const Notification: React.FC<Props> = (props) => {
+    const { type } = props;
+    const addPostStatus = useSelector(getAddPostStatus);
+    const addCommentStatus = useSelector(getAddCommentStatus);
+
+    console.log(type, addCommentStatus);
 
     return (
         <>
-            {(addPostStatus === AddStatus.ERROR || addPostStatus === AddStatus.OK) && (
+            {((type === 'post' && addPostStatus === AddStatus.ERROR) || addPostStatus === AddStatus.OK) && (
                 <NotificationContainer>
                     {addPostStatus === AddStatus.ERROR && <ErrorMessage>The post was not publish!</ErrorMessage>}
                     {addPostStatus === AddStatus.OK && (
                         <SuccessMessage>The post was successfully publish!</SuccessMessage>
                     )}
+                </NotificationContainer>
+            )}
+            {type === 'comment' && addCommentStatus === AddStatus.ERROR && (
+                <NotificationContainer>
+                    {addCommentStatus === AddStatus.ERROR && <ErrorMessage>The comment was not send!</ErrorMessage>}
                 </NotificationContainer>
             )}
         </>

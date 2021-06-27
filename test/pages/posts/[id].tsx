@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Loader from '../../components/loader';
 import Error from '../../components/error';
 import Comments from '../../components/comment';
+import Notification from '../../components/notification';
 
 const PostContainer = styled.div`
     max-width: 900px;
@@ -67,6 +68,7 @@ const PostComponent: React.FC = () => {
                         </PostBodyWrapper>
                     </PostContent>
                     <Comments />
+                    <Notification type="comment" />
                 </PostContainer>
             )}
             {post === undefined && !error && <Loader />}

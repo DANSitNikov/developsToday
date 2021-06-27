@@ -25,6 +25,12 @@ const Container = styled.main`
     }
 `;
 
+const NoPosts = styled.div`
+    width: 500px;
+    margin: 20px auto;
+    text-align: center;
+`;
+
 const Posts: React.FC = () => {
     const posts = useSelector(getPosts);
     const comments = useSelector(getComments);
@@ -33,7 +39,7 @@ const Posts: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (posts.length === 0) {
+        if (!posts) {
             dispatch(getPostsRequest());
         }
         if (comments.length === 0) {
@@ -49,8 +55,8 @@ const Posts: React.FC = () => {
 
     return (
         <>
-            {posts.length === 0 && !error && <Loader />}
-            {posts.length !== 0 && !error && (
+            {!posts && !error && <Loader />}
+            {posts && posts.length !== 0 && !error && (
                 <Container>
                     {posts.map((post, i) => (
                         <PostComponent index={i} key={post.id} id={post.id} title={post.title} body={post.body} />
@@ -58,6 +64,11 @@ const Posts: React.FC = () => {
                 </Container>
             )}
             {error && <Error />}
+            {posts && posts.length === 0 && (
+                <NoPosts>
+                    <h2>There is no posts yet</h2>
+                </NoPosts>
+            )}
         </>
     );
 };

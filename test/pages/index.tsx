@@ -20,7 +20,7 @@ export default function Home() {
             </Head>
             <Menu />
             <Posts />
-            <Notification />
+            <Notification type="post" />
         </Container>
     );
 }
