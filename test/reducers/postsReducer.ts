@@ -6,7 +6,7 @@ export enum Status {
     ERROR = 'ERROR',
 }
 
-export enum AddPostStatus {
+export enum AddStatus {
     PENDING = 'PENDING',
     OK = 'OK',
     ERROR = 'ERROR',
@@ -21,7 +21,7 @@ export interface Post {
 const initialState = {
     posts: [] as Array<Post>,
     status: null as null | Status,
-    addPostStatus: null as null | AddPostStatus,
+    addPostStatus: null as null | AddStatus,
 };
 
 type InitialState = typeof initialState;

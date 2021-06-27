@@ -18,7 +18,7 @@ const Title = styled.input`
     height: 50px;
     font-size: 25px;
     font-weight: 500;
-    border: 3px solid whitesmoke;
+    border: 3px solid #d5d3d3;
     padding-left: 10px;
     outline: none;
     color: #727272;
@@ -29,7 +29,7 @@ export const Content = styled.textarea`
     color: #727272;
     padding: 10px;
     outline: none;
-    border: 3px solid whitesmoke;
+    border: 3px solid #d5d3d3;
     resize: vertical;
     font-size: 22px;
     min-height: 250px !important;

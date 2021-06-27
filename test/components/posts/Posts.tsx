@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import PostComponent from './post';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPosts, getPostsStatus } from '../../selectors/selectors';
+import { getComments, getPosts, getPostsStatus } from '../../selectors/selectors';
 import { getPostsRequest } from '../../actions/postsAction';
 import Loader from '../loader';
 import { Status } from '../../reducers/postsReducer';
 import Error from '../error';
+import { getCommentsRequest } from '../../actions/commentsAction';
 
 const Container = styled.main`
     display: flex;
@@ -26,6 +27,7 @@ const Container = styled.main`
 
 const Posts: React.FC = () => {
     const posts = useSelector(getPosts);
+    const comments = useSelector(getComments);
     const status = useSelector(getPostsStatus);
     const [error, setError] = useState(false);
     const dispatch = useDispatch();
@@ -33,6 +35,9 @@ const Posts: React.FC = () => {
     useEffect(() => {
         if (posts.length === 0) {
             dispatch(getPostsRequest());
+        }
+        if (comments.length === 0) {
+            dispatch(getCommentsRequest());
         }
     }, []);
 

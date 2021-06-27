@@ -6,7 +6,7 @@ import { Post } from '../../reducers/postsReducer';
 import styled from 'styled-components';
 import Loader from '../../components/loader';
 import Error from '../../components/error';
-import Comment from '../../components/comment';
+import Comments from '../../components/comment';
 
 const PostContainer = styled.div`
     max-width: 900px;
@@ -42,16 +42,18 @@ const PostComponent: React.FC = () => {
     useEffect(() => {
         const id = router.query.id;
 
-        (async function () {
-            try {
-                const response = await axios.get(`https://simple-blog-api.crew.red/posts/${id}`);
-                setPost(response.data);
-            } catch (err) {
-                console.log(err);
-                setError(true);
-            }
-        })();
-    }, []);
+        if (id !== undefined) {
+            (async function () {
+                try {
+                    const response = await axios.get(`https://simple-blog-api.crew.red/posts/${id}`);
+                    setPost(response.data);
+                } catch (err) {
+                    console.log(err);
+                    setError(true);
+                }
+            })();
+        }
+    }, [router]);
 
     return (
         <>
@@ -64,7 +66,7 @@ const PostComponent: React.FC = () => {
                             <PostBody>{post?.body}</PostBody>
                         </PostBodyWrapper>
                     </PostContent>
-                    <Comment />
+                    <Comments />
                 </PostContainer>
             )}
             {post === undefined && !error && <Loader />}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getAddPostStatus } from '../../selectors/selectors';
-import { AddPostStatus } from '../../reducers/postsReducer';
+import { AddStatus } from '../../reducers/postsReducer';
 import styled from 'styled-components';
 
 const NotificationContainer = styled.div`
@@ -37,10 +37,10 @@ const Notification: React.FC = () => {
 
     return (
         <>
-            {(addPostStatus === AddPostStatus.ERROR || addPostStatus === AddPostStatus.OK) && (
+            {(addPostStatus === AddStatus.ERROR || addPostStatus === AddStatus.OK) && (
                 <NotificationContainer>
-                    {addPostStatus === AddPostStatus.ERROR && <ErrorMessage>The post was not publish!</ErrorMessage>}
-                    {addPostStatus === AddPostStatus.OK && (
+                    {addPostStatus === AddStatus.ERROR && <ErrorMessage>The post was not publish!</ErrorMessage>}
+                    {addPostStatus === AddStatus.OK && (
                         <SuccessMessage>The post was successfully publish!</SuccessMessage>
                     )}
                 </NotificationContainer>

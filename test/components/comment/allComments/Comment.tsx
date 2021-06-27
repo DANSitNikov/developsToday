@@ -16,11 +16,17 @@ const Paragraph = styled.p`
     margin: 0;
 `;
 
-const Comment: React.FC = () => {
+interface Props {
+    body: string;
+}
+
+const Comment: React.FC<Props> = (props) => {
+    const { body } = props;
+
     return (
         <Container>
             <Avatar />
-            <Paragraph>comment</Paragraph>
+            <Paragraph>{body}</Paragraph>
         </Container>
     );
 };

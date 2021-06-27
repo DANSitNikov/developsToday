@@ -1,4 +1,4 @@
-import { AddPostStatus, Post, Status } from '../reducers/postsReducer';
+import { AddStatus, Post, Status } from '../reducers/postsReducer';
 import { Dispatch } from 'redux';
 import axios from 'axios';
 
@@ -18,7 +18,7 @@ const postsAction = {
             type: 'SET_STATUS',
             status,
         } as const),
-    addNewPostStatus: (status: AddPostStatus | null) =>
+    addNewPostStatus: (status: AddStatus | null) =>
         ({
             type: 'ADD_NEW_POST_STATUS',
             status,
@@ -41,16 +41,16 @@ export const publishNewPost = (title: string, body: string) => async (dispatch: 
     const { addPost, addNewPostStatus } = postsAction;
 
     try {
-        dispatch(addNewPostStatus(AddPostStatus.PENDING));
+        dispatch(addNewPostStatus(AddStatus.PENDING));
         const post = await axios.post('https://simple-blog-api.crew.red/posts', {
             title,
             body,
         });
         dispatch(addPost(post.data));
-        dispatch(addNewPostStatus(AddPostStatus.OK));
+        dispatch(addNewPostStatus(AddStatus.OK));
     } catch (err) {
         console.error(err);
-        dispatch(addNewPostStatus(AddPostStatus.ERROR));
+        dispatch(addNewPostStatus(AddStatus.ERROR));
     } finally {
         setTimeout(() => {
             dispatch(addNewPostStatus(null));
